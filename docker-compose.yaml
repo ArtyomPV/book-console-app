@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: book-console
+      POSTGRES_USER: arty
+      POSTGRES_PASSWORD: arty
+    ports:
+      - "5433:5432"
