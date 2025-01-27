@@ -10,3 +10,23 @@ services:
       POSTGRES_PASSWORD: arty
     ports:
       - "5433:5432"
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data # Исправлено на правильный путь для хранения данных PostgreSQL
+
+
+  book-rest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/book-console
+      SPRING_DATASOURCE_USERNAME: arty
+      SPRING_DATASOURCE_PASSWORD: arty
+    ports:
+      - "8090:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  dbdata: # Опциональный том, если не хотите использовать путь к папке
